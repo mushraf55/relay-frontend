@@ -19,6 +19,15 @@ export function FormattedText({ text, className = "" }: { text: string; classNam
     if (!value) { flush(); continue; }
     const heading = value.match(/^(#{1,4})\s+(.+)$/);
     if (heading) { flush(); const Tag = `h${Math.min(heading[1].length + 2, 6)}` as "h3" | "h4" | "h5" | "h6"; blocks.push(<Tag key={`h-${index}`}>{inline(heading[2])}</Tag>); continue; }
+    if (value.startsWith("|") && index + 1 < lines.length && /^\s*\|?(?:\s*:?-{3,}:?\s*\|)+\s*$/.test(lines[index + 1])) {
+      flush();
+      const cells = (row: string) => row.trim().replace(/^\||\|$/g, "").split("|").map(cell => cell.trim());
+      const headers = cells(value); index += 2; const rows: string[][] = [];
+      while (index < lines.length && lines[index].trim().startsWith("|")) rows.push(cells(lines[index++]));
+      index--;
+      blocks.push(<div className="formatted-table-wrap" key={`table-${index}`}><table><thead><tr>{headers.map((cell, cellIndex) => <th key={cellIndex}>{inline(cell)}</th>)}</tr></thead><tbody>{rows.map((row, rowIndex) => <tr key={rowIndex}>{row.map((cell, cellIndex) => <td key={cellIndex}>{inline(cell)}</td>)}</tr>)}</tbody></table></div>);
+      continue;
+    }
     if (/^[-*]\s+/.test(value)) {
       flush(); const items = [value.replace(/^[-*]\s+/, "")];
       while (index + 1 < lines.length && /^\s*[-*]\s+/.test(lines[index + 1])) items.push(lines[++index].trim().replace(/^[-*]\s+/, ""));

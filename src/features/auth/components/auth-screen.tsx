@@ -34,5 +34,5 @@ function LoadedAuthScreen({ mode, redirectUrl }: { mode: 'login' | 'signup' | 'f
 
 export function AuthScreen({ mode, redirectUrl }: { mode: 'login' | 'signup' | 'forgot' | 'reset' | 'verify'; redirectUrl?: string }) {
   const destination = redirectUrl || (mode === 'signup' ? '/onboarding' : '/dashboard');
-  return <main className="mx-auto flex min-h-svh max-w-md flex-col items-center justify-center gap-6 p-6"><Link href="/" className="text-lg font-semibold">Relay<span className="text-primary">.</span></Link><ClerkLoading><AuthStatus/></ClerkLoading><ClerkFailed><AuthStatus failed/></ClerkFailed><ClerkLoaded><LoadedAuthScreen mode={mode} redirectUrl={destination}/></ClerkLoaded></main>;
+  return <main className="relative mx-auto flex min-h-svh max-w-md flex-col items-center justify-center gap-6 p-6"><div className="pointer-events-none absolute top-0 h-64 w-64 rounded-full bg-primary/10 blur-3xl"/><Link href="/" className="relative flex items-center gap-2 text-xl font-semibold"><span className="grid size-8 place-items-center rounded-lg bg-card ring-1 ring-border">R</span>Relay.</Link><div className="relative"><ClerkLoading><AuthStatus/></ClerkLoading><ClerkFailed><AuthStatus failed/></ClerkFailed><ClerkLoaded><LoadedAuthScreen mode={mode} redirectUrl={destination}/></ClerkLoaded></div></main>;
 }

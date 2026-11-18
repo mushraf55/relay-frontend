@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "ES2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -19,7 +23,9 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": [
+        "./src/*"
+      ]
     }
   },
   "include": [
@@ -28,7 +34,29 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
-    "**/*.mts"
+    "**/*.mts",
+    ".next-build/types/**/*.ts",
+    ".next-build/dev/types/**/*.ts",
+    ".next-taste/types/**/*.ts",
+    ".next-taste/dev/types/**/*.ts",
+    ".next-final/types/**/*.ts",
+    ".next-final/dev/types/**/*.ts",
+    ".next-release/types/**/*.ts",
+    ".next-release/dev/types/**/*.ts",
+    ".next-ui/types/**/*.ts",
+    ".next-ui/dev/types/**/*.ts",
+    ".next-chatbots-ui/types/**/*.ts",
+    ".next-chatbots-ui/dev/types/**/*.ts",
+    ".next-impeccable/types/**/*.ts",
+    ".next-impeccable/dev/types/**/*.ts",
+    ".next-chat-ui/types/**/*.ts",
+    ".next-chat-ui/dev/types/**/*.ts",
+    ".next-sidebar-ui/types/**/*.ts",
+    ".next-sidebar-ui/dev/types/**/*.ts",
+    ".next-workspace-redesign/types/**/*.ts",
+    ".next-workspace-redesign/dev/types/**/*.ts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }

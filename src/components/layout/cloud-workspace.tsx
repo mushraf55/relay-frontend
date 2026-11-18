@@ -7,10 +7,10 @@ import { createApi } from "@/lib/api";
 import { connectKnowledgeProgress, connectWorkspace } from "@/lib/workspace";
 
 export function CloudWorkspace({ children }: { children: React.ReactNode }) {
-  const { userId, orgId, isLoaded } = useAuth();
+  const { userId, isLoaded } = useAuth();
   if (!isLoaded) return <WorkspaceStatus message="Checking your Relay session…"/>;
   if (!userId) return <><RedirectToSignIn/><WorkspaceStatus message="Taking you to sign in…"/></>;
-  return <ConnectedWorkspace key={`${userId}:${orgId}`}>{children}</ConnectedWorkspace>;
+  return <ConnectedWorkspace key={userId}>{children}</ConnectedWorkspace>;
 }
 
 function WorkspaceStatus({ message }: { message: string }) {
@@ -21,14 +21,14 @@ function WorkspaceStatus({ message }: { message: string }) {
 }
 
 function ConnectedWorkspace({ children }: { children: React.ReactNode }) {
-  const { getToken, userId, orgId, isLoaded } = useAuth();
+  const { getToken, userId, isLoaded } = useAuth();
   const { user } = useUser();
   const getTokenRef = useRef(getToken);
   const [status, setStatus] = useState("Connecting your workspace…");
   const [authIssue, setAuthIssue] = useState(false);
   const [ready, setReady] = useState(false);
   const [attempt, setAttempt] = useState(0);
-  const workspaceId = orgId ? `org:${orgId}` : userId ? `user:${userId}` : "";
+  const workspaceId = userId ? `user:${userId}` : "";
   const profileName = user?.fullName || user?.firstName || "Your account";
   const profileEmail = user?.primaryEmailAddress?.emailAddress || "";
 

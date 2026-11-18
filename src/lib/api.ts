@@ -5,6 +5,13 @@ export type ApiRequest = {
 
 type TokenGetter = (options?: { skipCache?: boolean }) => Promise<string | null>;
 
+export class ApiError extends Error {
+  constructor(message: string, readonly status: number) {
+    super(message);
+    this.name = "ApiError";
+  }
+}
+
 async function readError(response: Response) {
   try {
     const body = await response.json();
@@ -40,13 +47,13 @@ export function createApi(getToken: TokenGetter, workspaceId?: string): ApiReque
 
   const requestJson = async <T>(path: string, options: RequestInit = {}) => {
     const response = await authenticated(path, options);
-    if (!response.ok) throw new Error(await readError(response));
+    if (!response.ok) throw new ApiError(await readError(response), response.status);
     return response.json() as Promise<T>;
   };
 
   const stream = async <T>(path: string, options: RequestInit, onEvent: (event: T) => void) => {
     const response = await authenticated(path, options);
-    if (!response.ok) throw new Error(await readError(response));
+    if (!response.ok) throw new ApiError(await readError(response), response.status);
     if (!response.body) throw new Error('The response stream was unavailable.');
     const reader = response.body.getReader(); const decoder = new TextDecoder(); let buffer = '';
     while (true) {

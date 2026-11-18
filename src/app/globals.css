@@ -3,74 +3,151 @@
 @import "shadcn/tailwind.css";
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.141 0.005 285.823);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.141 0.005 285.823);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.141 0.005 285.823);
-  --primary: oklch(0.488 0.243 264.376);
-  --primary-foreground: oklch(0.97 0.014 254.604);
-  --secondary: oklch(0.967 0.001 286.375);
-  --secondary-foreground: oklch(0.21 0.006 285.885);
-  --muted: oklch(0.967 0.001 286.375);
-  --muted-foreground: oklch(0.552 0.016 285.938);
-  --accent: oklch(0.488 0.243 264.376);
-  --accent-foreground: oklch(0.97 0.014 254.604);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.92 0.004 286.32);
-  --input: oklch(0.92 0.004 286.32);
-  --ring: oklch(0.705 0.015 286.067);
-  --chart-1: oklch(0.809 0.105 251.813);
-  --chart-2: oklch(0.623 0.214 259.815);
-  --chart-3: oklch(0.546 0.245 262.881);
-  --chart-4: oklch(0.488 0.243 264.376);
-  --chart-5: oklch(0.424 0.199 265.638);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.141 0.005 285.823);
-  --sidebar-primary: oklch(0.546 0.245 262.881);
-  --sidebar-primary-foreground: oklch(0.97 0.014 254.604);
-  --sidebar-accent: oklch(0.967 0.001 286.375);
-  --sidebar-accent-foreground: oklch(0.21 0.006 285.885);
-  --sidebar-border: oklch(0.92 0.004 286.32);
-  --sidebar-ring: oklch(0.705 0.015 286.067);
-  --font-sans: var(--font-inter);
-  --font-heading: var(--font-ibm-plex-sans);
+  color-scheme: dark;
+  --background: #000000;
+  --foreground: #ffffff;
+  --card: #0d0d0d;
+  --card-foreground: #ffffff;
+  --popover: #151515;
+  --popover-foreground: #ffffff;
+  --primary: #93f1f7;
+  --primary-foreground: #001314;
+  --secondary: #191919;
+  --secondary-foreground: #f5f5f5;
+  --muted: #171717;
+  --muted-foreground: #a7a7a7;
+  --accent: #93f1f7;
+  --accent-foreground: #001314;
+  --destructive: #ff7a7a;
+  --border: #292929;
+  --input: #333333;
+  --ring: #93f1f7;
+  --chart-1: #93f1f7;
+  --chart-2: #9ae187;
+  --chart-3: #f6c177;
+  --chart-4: #c4a7e7;
+  --chart-5: #eb6f92;
+  --radius: 0.75rem;
+  --sidebar: #080808;
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: #93f1f7;
+  --sidebar-primary-foreground: #001314;
+  --sidebar-accent: #181818;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #292929;
+  --sidebar-ring: #93f1f7;
+  --font-sans: "Host Grotesk", Arial, Helvetica, sans-serif;
+  --font-heading: "Host Grotesk", Arial, Helvetica, sans-serif;
+}
+
+@layer utilities {
+  main.flex.h-svh.flex-col header .text-slate-500,
+  main.flex.h-svh.flex-col header .text-slate-400,
+  main.flex.h-svh.flex-col footer .text-slate-400,
+  main.flex.h-svh.flex-col footer .text-slate-500 {
+    color: var(--muted-foreground) !important;
+  }
+
+  main.flex.h-svh.flex-col header .text-slate-700,
+  main.flex.h-svh.flex-col article .text-slate-800 {
+    color: var(--foreground) !important;
+  }
+
+  main.flex.h-svh.flex-col header [class*="bg-slate-50"],
+  main.flex.h-svh.flex-col header [class*="bg-white"] {
+    background: var(--card) !important;
+  }
+
+  main.flex.h-svh.flex-col header [class*="border-slate"],
+  main.flex.h-svh.flex-col footer,
+  main.flex.h-svh.flex-col footer [class*="border-slate"] {
+    border-color: var(--border) !important;
+  }
+
+  main.flex.h-svh.flex-col article[data-role="assistant"] > div:last-child,
+  main.flex.h-svh.flex-col article[data-mine="false"] > div:last-child {
+    border-color: var(--border) !important;
+    background: var(--card) !important;
+    color: var(--foreground) !important;
+  }
+
+  main.flex.h-svh.flex-col article[data-mine="true"] > div:last-child {
+    background: var(--primary) !important;
+    color: var(--primary-foreground) !important;
+  }
+
+  main.flex.h-svh.flex-col article[data-mine="true"] > div:last-child .text-blue-100,
+  main.flex.h-svh.flex-col article[data-mine="true"] > div:last-child .text-white {
+    color: var(--primary-foreground) !important;
+  }
+
+  main.flex.h-svh.flex-col footer input {
+    border-color: var(--input) !important;
+    background: var(--background) !important;
+    color: var(--foreground) !important;
+  }
+
+  main.relative.grid.min-h-svh form .text-slate-600,
+  main.relative.grid.min-h-svh form .text-slate-500,
+  main.relative.grid.min-h-svh form .text-blue-100 {
+    color: var(--muted-foreground) !important;
+  }
+
+  main.relative.grid.min-h-svh form [class*="bg-slate-50"] {
+    border-color: var(--border) !important;
+    background: var(--muted) !important;
+    color: var(--foreground) !important;
+  }
+
+  main.relative.grid.min-h-svh form > div:first-child > p:first-of-type {
+    display: none !important;
+  }
+}
+
+@layer utilities {
+  main.relative.grid.min-h-svh {
+    background: #000 !important;
+    color: #fff !important;
+  }
+
+  main.relative.grid.min-h-svh > div:first-child {
+    background: radial-gradient(circle at 50% 0%, rgba(147, 241, 247, 0.2), transparent 70%) !important;
+  }
+
+  main.relative.grid.min-h-svh form {
+    border-color: #292929 !important;
+    background: #0d0d0d !important;
+    color: #fff !important;
+    box-shadow: 0 32px 90px rgba(0, 0, 0, 0.55) !important;
+  }
+
+  main.relative.grid.min-h-svh form > div:first-child {
+    background: #111 !important;
+  }
+
+  main.flex.h-svh.flex-col {
+    background: #000 !important;
+    color: #fff !important;
+  }
+
+  main.flex.h-svh.flex-col > header,
+  main.flex.h-svh.flex-col > footer {
+    border-color: #292929 !important;
+    background: #080808 !important;
+  }
+
+  main.flex.h-svh.flex-col article > div:last-child {
+    border-color: #292929 !important;
+  }
+
+  [class~="bg-foreground"][class~="text-background"] {
+    background: #93f1f7 !important;
+    color: #001314 !important;
+  }
 }
 
 .dark {
-  --background: oklch(0.141 0.005 285.823);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.21 0.006 285.885);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.21 0.006 285.885);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.424 0.199 265.638);
-  --primary-foreground: oklch(0.97 0.014 254.604);
-  --secondary: oklch(0.274 0.006 286.033);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.274 0.006 286.033);
-  --muted-foreground: oklch(0.705 0.015 286.067);
-  --accent: oklch(0.424 0.199 265.638);
-  --accent-foreground: oklch(0.97 0.014 254.604);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.552 0.016 285.938);
-  --chart-1: oklch(0.809 0.105 251.813);
-  --chart-2: oklch(0.623 0.214 259.815);
-  --chart-3: oklch(0.546 0.245 262.881);
-  --chart-4: oklch(0.488 0.243 264.376);
-  --chart-5: oklch(0.424 0.199 265.638);
-  --sidebar: oklch(0.21 0.006 285.885);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.623 0.214 259.815);
-  --sidebar-primary-foreground: oklch(0.97 0.014 254.604);
-  --sidebar-accent: oklch(0.274 0.006 286.033);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.552 0.016 285.938);
+  color-scheme: dark;
 }
 
 @theme inline {
@@ -114,11 +191,65 @@
 }
 
 @layer base {
+  html,
+  body {
+    width: 100%;
+    margin: 0;
+    overflow-x: hidden;
+  }
+
   * {
     @apply border-border outline-ring/50;
   }
 
   body {
     @apply bg-background text-foreground;
+    min-height: 100svh;
+    background-image: radial-gradient(circle at 85% -10%, rgba(147, 241, 247, 0.08), transparent 28rem);
+    font-family: var(--font-sans);
+  }
+
+  ::selection {
+    background: #93f1f7;
+    color: #001314;
+  }
+
+  .formatted-text {
+    @apply space-y-3;
+  }
+
+  .formatted-text h3,
+  .formatted-text h4,
+  .formatted-text h5,
+  .formatted-text h6 {
+    @apply font-semibold tracking-tight;
+  }
+
+  .formatted-text ul {
+    @apply list-disc space-y-1 pl-5;
+  }
+
+  .formatted-text ol {
+    @apply list-decimal space-y-1 pl-5;
+  }
+
+  .formatted-text code {
+    @apply rounded bg-muted px-1 py-0.5 font-mono text-[0.9em];
+  }
+
+  .formatted-table-wrap {
+    @apply max-w-full overflow-x-auto rounded-lg border;
+  }
+
+  .formatted-table-wrap table {
+    @apply w-full min-w-[34rem] border-collapse text-left text-sm;
+  }
+
+  .formatted-table-wrap th {
+    @apply border-b bg-muted px-3 py-2 font-semibold;
+  }
+
+  .formatted-table-wrap td {
+    @apply border-b px-3 py-2 align-top last:border-b-0;
   }
 }
